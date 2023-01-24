@@ -8,7 +8,8 @@ abstract class ParentClass {
         $this->value = $valuee;
         $this->pricing = $priciing;
     }
-    public function exampleMethod() {
+    abstract public function exampleMethod();
+    public function forMethod() {
         echo "This is an example method, named $this->name, valued $this->value, priced $this->pricing" . PHP_EOL;
     }
 }
@@ -21,8 +22,8 @@ class ChildClass extends ParentClass {
         $this->limit = $limit;
     }
     public function exampleMethod() {
-        parent::exampleMethod();
-        echo "Limited $this->limit This is the best method" . PHP_EOL;
+        parent::forMethod();
+        echo "Limited $this->limit This is a good method" . PHP_EOL;
     }
 }
 
@@ -34,8 +35,8 @@ class ChildKelaz extends ParentClass {
         $this->Rating = $Rating;
     }
     public function exampleMethod() {
-        parent::exampleMethod();
-        echo "Rated $this->Rating This is a good method" . PHP_EOL;
+        parent::forMethod();
+        echo "Rated $this->Rating This is the best method" . PHP_EOL;
     }
 }
 
