@@ -1,6 +1,6 @@
 <?php
 abstract class ParentClass {
-    private $name, $value, $pricing;
+    protected $name, $value, $pricing;
     public function __construct($namee, $valuee, int $priciing)
     {
         # code...

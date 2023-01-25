@@ -1,7 +1,7 @@
 <?php
 
 class connect{
-    private $ip = "192.10.10";
+    protected $ip = "192.10.10";
     protected $post = 13;
     public static $Friends = 0;
     public function login($username, $fullName, $password,)

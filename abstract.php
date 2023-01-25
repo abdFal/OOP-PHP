@@ -2,7 +2,7 @@
 interface myFel{
     public function makan();
     public function warna($setWarna);
-    public function setBerat($setBerat);
+    public function setBerat(int $setBerat);
     public function getBerat();
 }
 interface isFel{
@@ -10,7 +10,6 @@ interface isFel{
 }
 
 abstract class yourFel {
-    private $m, $n, $b;
     public $berat;
     public function dimakan()
     {
@@ -30,10 +29,12 @@ class apel extends yourFel implements myFel,isFel{
     public function makan()
     {
         // code
+        echo "Apel langsung dimakan" . PHP_EOL;
     }
     public function warna($setWarna)
     {
-        $this->warna = $setWarna;
+        $myWarna = $this->warna = $setWarna;
+        echo $myWarna, PHP_EOL;
     }
     public function minum()
     {
@@ -55,4 +56,6 @@ class zakar extends yourFel implements myFel{
 
 $pj = new apel;
 $pj->setBerat(40);
+$pj->warna("Merah");
+$pj->makan();
 $pj->getBerat();

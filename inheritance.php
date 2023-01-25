@@ -1,29 +1,29 @@
 <?php
 
-// class Mobil {
-//     private $jenis;
-//     public function setJenisMobil($jenisMobil)
-//     {
-//         # code...
-//         $this->jenis = $jenisMobil;
-//     }
+class Mobil {
+    private $jenis;
+    public function setJenisMobil($jenisMobil)
+    {
+        # code...
+        $this->jenis = $jenisMobil;
+    }
     
-//     public function getJenisMobil()
-//     {
-//         # code...
-//         return $this->jenis;
-//     }
+    public function getJenisMobil()
+    {
+        # code...
+        return $this->jenis;
+    }
 
-// }
-// class mobilClassic extends Mobil{
+}
+class mobilClassic extends Mobil{
 
-// }
+}
 
-// $myMobil = new Mobil;
-// $myMobil -> setJenisMobil("Sport");
-// $yourMobil = new mobilClassic;
-// $yourMobil -> setJenisMobil("Sedan");
-// echo $yourMobil -> getJenisMobil();
+$myMobil = new Mobil;
+$myMobil -> setJenisMobil("Sport");
+$yourMobil = new mobilClassic;
+$yourMobil -> setJenisMobil("Sedan");
+echo $yourMobil -> getJenisMobil();
 
 class Animal {
     private $name, $color;
