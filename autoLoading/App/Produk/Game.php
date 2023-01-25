@@ -1,4 +1,5 @@
 <?php
+
 class Game extends Produk implements Check{
     private $wktBermain;
 

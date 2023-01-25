@@ -1,15 +1,22 @@
 <?php
-// function autoLoader($className)
-// {
-//     $path = "App/Produk/";
-//     $ext = ".php";
-//     $fullPath = $path . $className . $ext;
-//     include_once $fullPath;
-// }
-// spl_autoload_register('autoLoader');
 
-function autoloader($class) {
-    $class = str_replace("\\","/",$class);
-    require_once $class . '.php';
-}
-spl_autoload_register('autoloader');
+// require_once 'Produk/Cek.php';
+// require_once 'Produk/Produk.php';
+// require_once 'Produk/Komik.php';
+// require_once 'Produk/Game.php';
+// require_once 'Produk/User.php';
+// require_once 'Service/User.php';
+
+spl_autoload_register(function ($class) {
+
+    $class = explode('\\' , $class);
+    $class = end($class);
+    require_once __DIR__ . '/Produk/' . $class . '.php';
+});
+
+spl_autoload_register(function ($class) {
+
+    $class = explode('\\' , $class);
+    $class = end($class);
+    require_once __DIR__ . '/Service/' . $class . '.php';
+});

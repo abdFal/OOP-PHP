@@ -1,4 +1,5 @@
 <?php
+
 class Komik extends Produk implements Check{
 
     private $jmlHalaman;
