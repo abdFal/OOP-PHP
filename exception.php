@@ -16,5 +16,4 @@ try {
     fclose($file);
   }
 }
-
 ?>
