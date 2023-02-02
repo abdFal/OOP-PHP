@@ -18,53 +18,92 @@ class mySet {
     }
 }
 $testSet = new mySet;
-$testSet->age = 9;
+$testSet->age = 15;
 $testSet->name = 'Nofal';
 
 // get
 class myGet {
     private $data = array();
-
+    public function __construct(...$data)
+    {   
+        $this->data = $data;
+    }
     public function __get($property) {
-        if (array_key_exists($property, $this->data)) {
-            return $this->data[$property];
+        if ($property !== null) {
+            return $this->$property;
+        }
+        else {
+            throw new ParseError(sprintf("error parse"));
         }
     }
+}
+$testGet = new myGet(null);
+try {
+    echo implode(", ", $testGet->data);
+} catch (ParseError $e) {
+    echo $e->getMessage();
 }
 
 // unset
 class myUnset {
-    private $data = array();
+    private $data = [
+        'name' => "nofal",
+        'id' => "10"
+    ];
 
-    public function __unset($property) {
-        unset($this->data[$property]);
+    public function __unset($property)
+    {
+        if(isset ($this->data[$property])){
+            unset ($this->data["name"]);
+        }
     }
 }
+$myObj = new myUnset;
+var_dump($myObj);
 
 // isset
-class myIsset {
-    private $data = array();
-
-    public function __isset($property) {
-        return isset($this->data[$property]);
+class myIsset{
+    private $name;
+        public function __isset($property)
+            { if ('name' === $property) {
+            return true;}
     }
 }
+$magic = new myIsset();
+// var_dump(isset($magic->name));
 
 // sleep
+// Define a class named mySleep
 class mySleep {
-    private $data = array();
+  // Define a private property named $data
+  private $data = array();
 
-    public function __sleep() {
-        return array('data');
-    }
+  // Define a magic method named __sleep
+  public function __sleep() {
+    // This method returns the name of the property to be serialized
+    return array('data');
+  }
 }
 
-// wakeup
+// Define a class named myWakeup
 class myWakeup {
-    public function __wakeup() {
-        // wakeup code
-    }
+  // Define a magic method named __wakeup
+  public function __wakeup() {
+    // This method is called when the object is unserialized
+    echo "Waking up...";
+  }
 }
+
+// Create an instance of the mySleep class
+$obj = new mySleep();
+
+// Serialize the object
+$serialized = serialize($obj);
+
+// Unserialize the serialized data
+$unserialized = unserialize($serialized);
+
+// The __wakeup method is automatically called when unserializing
 
 // call
 class myCall {
