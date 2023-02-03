@@ -73,59 +73,64 @@ $magic = new myIsset();
 // var_dump(isset($magic->name));
 
 // sleep
-// Define a class named mySleep
-class mySleep {
-  // Define a private property named $data
-  private $data = array();
+class Example {
+    private $data;
 
-  // Define a magic method named __sleep
-  public function __sleep() {
-    // This method returns the name of the property to be serialized
-    return array('data');
-  }
-}
-
-// Define a class named myWakeup
-class myWakeup {
-  // Define a magic method named __wakeup
-  public function __wakeup() {
-    // This method is called when the object is unserialized
-    echo "Waking up...";
-  }
-}
-
-// Create an instance of the mySleep class
-$obj = new mySleep();
-
-// Serialize the object
-$serialized = serialize($obj);
-
-// Unserialize the serialized data
-$unserialized = unserialize($serialized);
-
-// The __wakeup method is automatically called when unserializing
-
-// call
-class myCall {
-    private $prefix = 'call_';
-
-    public function __call($method, $arguments) {
-        if (strpos($method, $this->prefix) === 0) {
-            $actualMethod = substr($method, strlen($this->prefix));
-            if (method_exists($this, $actualMethod)) {
-                return call_user_func_array([$this, $actualMethod], $arguments);
-            }
-        }
-        throw new BadMethodCallException("Method {$method} does not exist");
+    public function __construct($data) {
+        $this->data = $data;
     }
 
-    private function testMethod() {
-        return "Test Method called" . PHP_EOL;
+    public function __sleep() {
+        return array('data');
+    }
+
+    public function getData() {
+        return $this->data;
+    }
+}
+
+// Menciptakan object
+$example = new Example(array(15, "nodg"));
+$serializedData = serialize($example);
+$example = unserialize($serializedData);
+
+// Mendapatkan data dari object
+$data = $example->getData();
+print_r($data);
+
+
+// Wakeup
+class myWakeup {
+    protected $data;
+    public function __wakeup() {
+    // This method is called when the object is unserialized
+    $this->data = array('new_key' => 'new_value');
+    echo "Waking up..." . PHP_EOL;
+  }
+}
+
+$myObject = new myWakeup();
+$serialized = serialize($myObject);
+$myObject = unserialize($serialized);
+
+// call
+    class myCall {
+    private function database(){
+        echo "Selamat anda berhasil masuk" . PHP_EOL;
+    }
+    public function __call($name, $arguments)
+    {
+        if($name == 'database'){
+            return $this->database();
+        }
+        else {
+            throw new ParseError(sprintf("$name tidak valdi"));
+        }
     }
 }
 
 $call = new myCall();
-echo $call->call_testMethod();
+echo $call->database();
 
 // call static
 class myCallStatic {
@@ -142,9 +147,27 @@ class myCallStatic {
     }
 
     private static function testMethod() {
-        return "Static Test Method called";
+        return "Static Test Method called" . PHP_EOL;
     }
 }
 
 echo myCallStatic::call_static_testMethod();
 
+// toString
+class str{
+    public function sayTo()
+    {
+        # code...
+        $msg = "i really miss you";
+        for (;;) {
+            echo $msg . PHP_EOL;
+        };
+    }
+    public function __toString()
+    {
+        return "i miss you" . PHP_EOL;
+    }
+}
+
+echo $yourStr = new str;
+echo $yourStr -> sayTo();
