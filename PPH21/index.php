@@ -1,5 +1,12 @@
 <?php
-require_once "App/init.php";
+// require_once "App/init.php";
+require __DIR__ . '/vendor/autoload.php';
+use App\Calculate\FirstRuleCalculator;
+use App\Calculate\SecondRuleCalculator;
+use App\Calculate\ThirdRuleCalculator;
+use App\Calculate\FourthRuleCalculator;
+use App\Calculate\PPH21Calculator;
+
 $first = new FirstRuleCalculator();
 $second = new SecondRuleCalculator($first);
 $third = new ThirdRuleCalculator($second);

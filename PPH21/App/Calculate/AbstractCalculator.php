@@ -1,4 +1,5 @@
 <?php
+namespace App\Calculate;
 abstract class AbstractCalculator implements CalculatorInterface
 {
 private $chain;
